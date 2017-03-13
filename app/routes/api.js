@@ -1,4 +1,5 @@
 var User = require('../models/user'); // Import User Model
+var Incident = require('../models/incident');
 var jwt = require('jsonwebtoken'); // Import JWT Package
 var secret = 'harrypotter'; // Create custom secret for use in JWT
 var nodemailer = require('nodemailer'); // Import Nodemailer Package
@@ -25,7 +26,16 @@ module.exports = function(router) {
     });
     // var client = nodemailer.createTransport(sgTransport(options)); // Use if using sendgrid configuration
     // End Sendgrid Configuration Settings  
-
+    router.post('/incident',function(req,res){
+        var incident = new Incident();
+        incident.name = req.body.name;
+        incident.empid = req.body.empid;
+        incident.approver = req.body.approver;
+        incident.approverid =req.body.approverid;
+        incident.sev =req.body.sev;
+        incident.issuetype =req.body.issuetype;
+        incident.save();
+    })
     // Route to register new users  
     router.post('/users', function(req, res) {
         var user = new User(); // Create new User object
