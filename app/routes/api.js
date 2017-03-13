@@ -32,9 +32,9 @@ module.exports = function(router) {
         incident.empid = req.body.empid;
         incident.approver = req.body.approver;
         incident.approverid =req.body.approverid;
-        incident.sev =req.body.sev;
-        incident.issuetype =req.body.issuetype;
-        incident.save();
+        incident.save(function(){
+            console.log('save');
+        });
     })
     // Route to register new users  
     router.post('/users', function(req, res) {
@@ -84,7 +84,7 @@ module.exports = function(router) {
                         to: [user.email, 'rajat.acharya93@gmail.com'],
                         subject: 'Your Activation Link',
                         text: 'Hello ' + user.name + ', thank you for registering at localhost.com. Please click on the following link to complete your activation:https://still-taiga-38678.herokuapp.com/' + user.temporarytoken,
-                        html: 'Hello<strong> ' + user.name + '</strong>,<br><br>Thank you for registering at localhost.com. Please click on the link below to complete your activation:<br><br><a href="https://still-taiga-38678.herokuapp.com/activate/' + user.temporarytoken + '">https://still-taiga-38678.herokuapp.com/activate/</a>'
+                        html: 'Hello<strong> ' + user.name + '</strong>,<br><br>Thank you for registering at localhost.com. Please click on the link below to complete your activation:<br><br><a href="https://still-taiga-38678.herokuapp.com/activate/' + user.temporarytoken + '">http://localhost:8080/activate/</a>'
                     };
                     // Function to send e-mail to the user
                     client.sendMail(email, function(err, info) {
