@@ -15,7 +15,11 @@ var app = angular.module('appRoutes', ['ngRoute'])
     .when('/about', {
         templateUrl: 'app/views/pages/about.html'
     })
-
+ .when('/incidentcreate', {
+        templateUrl: 'app/views/pages/incidentform/incidentform.html',
+        controller: 'createCtrl',
+        controllerAs: 'createincident'
+    })
     // Route: User Registration
     .when('/register', {
         templateUrl: 'app/views/pages/users/register.html',
